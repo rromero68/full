@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html manifest="full.hyperesources/cache.manifest">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+	<title>full</title>
+	<style>
+		html {
+			height:100%;
+		}
+		body {
+			background-color:#000000;
+			margin:0;
+			height:100%;
+		}
+	</style>
+	<!-- copy these lines to your document head: -->
+
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, width=device-width" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	 <script type="text/javascript">
+
+// Variable to check if fullscreen is on/off
+var db, isfullscreen = false;
+
+//following lines are for "adapt document size to window size" funtion
+  function myCallback(hypeDocument, element, event) {
+    if (isScalePossible()){
+      window.myHypeContainerId = hypeDocument.documentId();
+      $('#' + window.myHypeContainerId).css({
+        '-moz-transform-origin': '0% 0%',
+        '-webkit-transform-origin': '0% 0%',
+        '-ms-transform-origin': '0% 0%',
+        '-o-transform-origin': '0% 0%',					
+        'transform-origin': '0% 0%',
+        margin: 0
+      });
+
+      scaleSite();
+      $(window).resize(scaleSite);
+    }
+    return true;
+  }
+
+  if("HYPE_eventListeners" in window === false) {
+    window.HYPE_eventListeners = Array();
+  }
+  window.HYPE_eventListeners.push({"type":"HypeDocumentLoad", "callback":myCallback});
+
+
+  function scaleSite()
+  {
+  	var hypeContainer = $('#' + window.myHypeContainerId);
+    var containerWidth = hypeContainer.width();
+    var containerHeight = hypeContainer.height();
+    var parentWidth = hypeContainer.parent().width();
+    var parentHeight = hypeContainer.parent().height();
+    var scaleWidth = parentWidth / containerWidth;
+    var scaleHeight = parentHeight / containerHeight;
+    var scale = Math.min(scaleWidth, scaleHeight);
+    var left = (containerWidth * scale < parentWidth) ? ((parentWidth - (containerWidth * scale)) / 2) + 'px' : '0px';
+    var top = (containerHeight * scale < parentHeight) ? ((parentHeight - (containerHeight * scale)) / 2) + 'px' : '0px' ;
+    hypeContainer.css({
+        "-moz-transform"    : "scale("+scale+")",
+        "-webkit-transform" : "scale("+scale+")",
+        "-ms-transform"     : "scale("+scale+")",
+        "-o-transform"      : "scale("+scale+")",
+        "transform"         : "scale("+scale+")",
+        "left" : left,
+        "top" : top
+    });
+  }
+
+  function isScalePossible() 
+  {
+    can = 'MozTransform' in document.body.style;
+    if(!can) can = 'webkitTransform' in document.body.style;
+    if(!can) can = 'msTransform' in document.body.style;
+    if(!can) can = 'OTransform' in document.body.style;
+    if(!can) can = 'transform' in document.body.style;
+    if(!can) can = 'Transform' in document.body.style;
+    return can;
+  }
+
+</script>
+
+
+	
+
+	<!-- end copy -->
+  </head>
+  <body>
+	<!-- copy these lines to your document: -->
+
+	<div id="full_hype_container" style="margin:auto;position:relative;width:600px;height:400px;overflow:hidden;">
+		<script type="text/javascript" charset="utf-8" src="full.hyperesources/full_hype_generated_script.js?15981"></script>
+	</div>
+
+	<!-- end copy -->
+	
+
+
+	<!-- text content for search engines: -->
+
+	<div style="display:none" aria-hidden=true>
+
+
+	</div>
+
+	<!-- end text content: -->
+
+  </body>
+</html>
